@@ -15,6 +15,7 @@ ARGS=("$@")
 N_EVENTS=0                                                      # Number of events
 N_PROC=$SLURM_JOB_CPUS_PER_NODE                                 # Number of parallel processes per job
 N_JOBS=1                                                        # Number of instances in same node
+GENERATOR=pythia8                                               # Generator to be used in simulation
 LOAD_PACKAGES="O2/nightly-$(TZ=Europe/Zurich date +%Y%m%d)-1"   # CVMFS packages, comma-separated
 CVMFS_NAMESPACE='/cvmfs/alice-nightlies.cern.ch'                # CVMFS namespace
 STEP=                                                           # Step: sim, digi, itsreco
@@ -26,6 +27,10 @@ while [[ $# -gt 0 ]]; do
     ;;
     --jobs)
       N_JOBS=$2
+      shift
+    ;;
+    --generator)
+      GENERATOR=$2
       shift
     ;;
     --processes)
@@ -152,7 +157,7 @@ case "$STEP" in
             fi
             echo "Running simulation with $N_PROC jobs and $NEVT_THIS_INST events, job $I"
             set -x
-            o2-sim ${N_PROC:+-j $N_PROC} -n $NEVT_THIS_INST --skipModules ZDC CPV MID -g pythia8 &> output.log &
+            o2-sim ${N_PROC:+-j $N_PROC} -n $NEVT_THIS_INST --skipModules ZDC CPV MID -g $GENERATOR &> output.log &
             PROCESSES+=($!)
             set +x
         popd

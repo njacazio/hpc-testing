@@ -22,6 +22,7 @@ env/submit.sh -J JOBNAME \
               --processes NPROCESSES \
               --jobs NJOBS \
               --step sim \
+              --generator pythia8
               [--packages O2/nightly-XXXXYYZZ-1]
 ```
 
@@ -32,6 +33,7 @@ sbatch -J JOBNAME env/submit.sh --events NEVENTS \
                                 --processes NPROCESSES \
                                 --jobs NJOBS \
                                 --step sim \
+                                --generator pythia8
                                 [--packages O2/nightly-XXXXYYZZ-1]
 ```
 

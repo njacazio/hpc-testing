@@ -131,7 +131,7 @@ if [[ ! $SINGULARITY_CONTAINER ]]; then
 
   exec singularity exec --contain --ipc --pid \
                         --home /dummy_home \
-                        --bind "/cvmfs,$MY_OUTPUT_DIRECTORY" \
+                        --bind "/cvmfs,/scratch_local,$MY_OUTPUT_DIRECTORY" \
                         /cvmfs/alice-nightlies.cern.ch/singularity/alisw/slc7-builder \
                         "$MY_OUTPUT_DIRECTORY/singularity_entrypoint" "${ARGS[@]}"
 fi

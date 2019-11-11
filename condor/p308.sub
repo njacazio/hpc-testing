@@ -1,0 +1,17 @@
+# Unix submit description file
+# sleep.sub -- simple sleep job
+
+universe = vanilla
++WantJobRouter = True
+
++Owner = UNDEFINED
+
+executable              = simexe.sh
+log                     = htcp308.log
+output                  = htcp308.out
+error                   = htcp308.err
+should_transfer_files   = Yes
+when_to_transfer_output = ON_EXIT
+use_x509userproxy = true
+arguments = ""
+queue 1

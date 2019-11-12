@@ -40,3 +40,11 @@ if [[ -z ${JOBTAG} ]]; then
     ln -sfn ${JOBTARGETDIR} ${JOBTAG}
 fi
 
+if [[ -f htcp308.out ]]; then
+    SIMTAG=$(grep -F "SimTag=" htcp308.out)
+    echo ${SIMTAG#SimTag=}
+    if [[ -z $SIMTAG ]]; then
+        ln -sfn ${JOBTARGETDIR} ${SIMTAG}
+    fi
+fi
+

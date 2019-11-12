@@ -24,7 +24,7 @@ echo "N Inst    =" $NINSTANCES
 echo "SimTag= ${NEVENTS}ev_${WORKERS}w_${NINSTANCES}i_${GENERATOR}"
 
 # Copy the input files via xrd
-FILETOGET="run.sh domon.sh getperf.py shiptoalien.sh"
+FILETOGET="run.sh domon.sh getperf.py shiptoalien.sh checkjobstatus.sh"
 for I in $FILETOGET; do
     singularity exec --bind /cvmfs \
     /cvmfs/alice-nightlies.cern.ch/singularity/alisw/slc7-builder -c \

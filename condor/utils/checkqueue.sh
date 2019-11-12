@@ -24,6 +24,11 @@ while [ -n "$1" ]; do # while loop starts
     shift
 done
 
+if [[ ! -f "initCE.sh" ]]; then
+    echo "Please provide a initCE.sh file"
+    exit
+fi
+
 source "initCE.sh"
 
 condor_q -name $CE -pool $CE:$PORT ${JOBID} > ${CONDOR_Q_FILE}

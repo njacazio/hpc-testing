@@ -43,6 +43,11 @@ if [[ -f latest/htcp308.out ]]; then
     if [[ ! -z $SIMTAG ]]; then
         ln -sfn ${JOBTARGETDIR} ${SIMTAG}
     fi
+    NINST=$(cat latest/htcp308.out | grep "N Inst    =" | head -1)
+    NINST=${NINST#N Inst    = }
+    if [[ ! -z $NINST ]]; then
+        echo "So far terminated $(cat latest/htcp308.out | grep "just terminated" | wc -l)/$NINST"
+    fi
 fi
 # set +x
 

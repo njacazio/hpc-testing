@@ -20,7 +20,7 @@ fi
 
 source "initCE.sh"
 
-echo "Retrieving output for JobID ${JOBID}"
+echo "Retrieving output for JobID ${JOBID} $(date)"
 
 condor_transfer_data -name ${CE} -pool ${CE}:${PORT} ${JOBID}
 

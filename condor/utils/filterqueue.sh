@@ -26,20 +26,20 @@ echo "Found ${NALICEJOBS} jobs for ALICE"
 echo $ALICEJOBS
 
 MASTERJOBS=""
-SLAVEJOBS=""
+SERVANTJOBS=""
 ORPHANJOBS=""
 for i in $ALICEJOBS; do
     # echo $i
-    if [[ $SLAVEJOBS == *"$i"* ]]; then
+    if [[ $SERVANTJOBS == *"$i"* ]]; then
         continue
     fi
-    SLAVE=$i
-    ((SLAVE++))
-    # echo "SlaveJob $SLAVE"
-    if [[ ${ALICEJOBS} == *"${SLAVE}"* ]]; then
+    SERVANT=$i
+    ((SERVANT++))
+    # echo "ServantJob $SERVANT"
+    if [[ ${ALICEJOBS} == *"${SERVANT}"* ]]; then
         # echo "Is a good master"
         MASTERJOBS="$MASTERJOBS $i"
-        SLAVEJOBS="$SLAVEJOBS $SLAVE"
+        SERVANTJOBS="$SERVANTJOBS $SERVANT"
     else
         ORPHANJOBS="$ORPHANJOBS $i"
     fi
@@ -47,7 +47,7 @@ done
 
 echo "MASTERS: $MASTERJOBS"
 echo $MASTERJOBS > "${CONDOR_Q_FILE%.txt}_masters.txt"
-echo "SLAVES: $SLAVEJOBS"
-echo $SLAVEJOBS > "${CONDOR_Q_FILE%.txt}_slaves.txt"
+echo "SERVANTS: $SERVANTJOBS"
+echo $SERVANTJOBS > "${CONDOR_Q_FILE%.txt}_servants.txt"
 echo "ORPHANS: $ORPHANJOBS"
 echo $ORPHANJOBS > "${CONDOR_Q_FILE%.txt}_orphans.txt"

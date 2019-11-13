@@ -7,7 +7,7 @@ function psmon() {
 
 while :
 do
-    ./getperf.py >>mon.log
+    ./getperf.py | tee -a mon.log
     psmon
     sleep 60
 done

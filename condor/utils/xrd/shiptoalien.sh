@@ -2,6 +2,11 @@
 echo "check proxy -> " $X509_USER_PROXY
 ls -l $X509_USER_PROXY
 
+if [[ -z $X509_USER_PROXY ]]; then
+    echo "Cannot find proxy"
+    exit 0
+fi
+
 export jobid=$(echo $X509_USER_PROXY|awk -F"/" '{print $6}')
 
 rm /tmp/x509up_u$UID

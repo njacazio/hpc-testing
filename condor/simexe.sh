@@ -67,7 +67,7 @@ cat mon.log
 echo "Printing monitoring pslog"
 cat psmon.txt
 
-singularity exec --bind /cvmfs \
-/cvmfs/alice-nightlies.cern.ch/singularity/alisw/slc7-builder -c \
+singularity exec --bind /cvmfs,/scratch_local,/marconi_scratch /cvmfs/alice-nightlies.cern.ch/singularity/alisw/slc7-builder \
 /cvmfs/alice-nightlies.cern.ch/bin/alienv setenv VO_ALICE@AliEn-ROOT-Legacy::0.1.1-3 -c \
+/cvmfs/alice-nightlies.cern.ch/bin/alienv setenv O2/nightly-20190710-1 -c \
 ./shiptoalien.sh

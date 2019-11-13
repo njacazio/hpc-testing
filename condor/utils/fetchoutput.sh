@@ -7,7 +7,6 @@ if [[ ${1} == "-h" ]]; then
 fi
 
 JOBID=${1}
-JOBTAG=${@:2}
 
 if [[ -z ${JOBID} ]]; then
     echo "Please pass JobID"
@@ -36,15 +35,14 @@ done
 
 ln -sfn ${JOBTARGETDIR} latest
 
-if [[ -z ${JOBTAG} ]]; then
-    ln -sfn ${JOBTARGETDIR} ${JOBTAG}
-fi
-
-if [[ -f htcp308.out ]]; then
-    SIMTAG=$(grep -F "SimTag=" htcp308.out)
-    echo ${SIMTAG#SimTag=}
-    if [[ -z $SIMTAG ]]; then
+# set -x
+if [[ -f latest/htcp308.out ]]; then
+    SIMTAG=$(grep -F "SimTag=" latest/htcp308.out)
+    SIMTAG=${SIMTAG#SimTag=}
+    # echo ${SIMTAG}
+    if [[ ! -z $SIMTAG ]]; then
         ln -sfn ${JOBTARGETDIR} ${SIMTAG}
     fi
 fi
+# set +x
 

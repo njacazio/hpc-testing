@@ -8,11 +8,10 @@ if [[ ! -f $CONDOR_Q_FILE ]]; then
 fi
 
 while [[ 1 ]]; do
-    ./filterqueue.sh
+    ./utils/filterqueue.sh
     MASTERJOBS=$(cat $CONDOR_Q_FILE | xargs)
     for i in $MASTERJOBS; do
-        echo $i
-        ./fetchoutput $i
+        ./utils/fetchoutput.sh $i
     done
     sleep 1800
 done

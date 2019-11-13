@@ -6,9 +6,9 @@ if [[ ${1} == "-h" ]]; then
     exit
 fi
 
-./checkqueue.sh -b
+./utils/checkqueue.sh -b
 
-ALICEJOBTAG="cms"
+ALICEJOBTAG="ali"
 NALICEJOBS=0
 ALICEJOBS=""
 while read line; do

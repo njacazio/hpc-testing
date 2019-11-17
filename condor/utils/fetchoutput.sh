@@ -22,32 +22,16 @@ source "initCE.sh"
 
 echo "Retrieving output for JobID ${JOBID} $(date)"
 
-condor_transfer_data -name ${CE} -pool ${CE}:${PORT} ${JOBID}
-
 JOBTARGETDIR="output/${JOBID}"
 
 mkdir -v -p "${JOBTARGETDIR}"
 
-TOMOVE="htcp308.log htcp308.out htcp308.err"
-for i in ${TOMOVE}; do
-    mv -v $i "${JOBTARGETDIR}/"
-done
+pushd ${JOBTARGETDIR}
+condor_transfer_data -name ${CE} -pool ${CE}:${PORT} ${JOBID}
+echo "Output content:"
+ls
+popd
 
 ln -sfn ${JOBTARGETDIR} latest
 
-# set -x
-if [[ -f latest/htcp308.out ]]; then
-    SIMTAG=$(grep -F "SimTag=" latest/htcp308.out)
-    SIMTAG=${SIMTAG#SimTag=}
-    # echo ${SIMTAG}
-    if [[ ! -z $SIMTAG ]]; then
-        ln -sfn ${JOBTARGETDIR} ${SIMTAG}
-    fi
-    NINST=$(cat latest/htcp308.out | grep "N Inst    =" | head -1)
-    NINST=${NINST#N Inst    = }
-    if [[ ! -z $NINST ]]; then
-        echo "So far terminated $(cat latest/htcp308.out | grep "just terminated" | wc -l)/$NINST"
-    fi
-fi
-# set +x
-
+./utils/linkoutput.sh ${JOBTARGETDIR}
